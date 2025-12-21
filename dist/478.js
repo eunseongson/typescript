@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkspotify_demo=self.webpackChunkspotify_demo||[]).push([[478],{478(s,e,d){d.r(e),d.d(e,{default:()=>c}),d(540);var t=d(658),i=d(848);const c=()=>{const{id:s}=(0,t.g)();return(0,i.jsxs)("div",{children:["플레이리스트 id : ",s]})}}}]);
+//# sourceMappingURL=478.js.map?ver=81934d751fd5b4fcf1b1
