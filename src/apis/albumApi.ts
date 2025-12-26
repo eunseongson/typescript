@@ -1,18 +1,16 @@
 import axios from "axios"
+import { SPOTIFY_BASE_URL } from "../configs/commonConfig";
+import { IGetNewReleasesResponse } from "../models/album";
 
-export const getNewReleases = async () => {
-    try{
-        const response = await axios.get('https://api.spotify.com/v1/browse/new-releases', {
+export const getNewReleases = async (clientCredentialToken: string): Promise<IGetNewReleasesResponse> => {
+    try {
+        const response = await axios.get(`${SPOTIFY_BASE_URL}/browse/new-releases?limit=6`, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('access_token')}`
+                Authorization: `Bearer ${clientCredentialToken}`
             },
-            params: {
-                limit: 20,
-                offset: 0
-            }
         });
         return response.data;
-    }catch(err){
-        
+    } catch (err) {
+        throw new Error('Failed to fetch new releases');
     }
 }

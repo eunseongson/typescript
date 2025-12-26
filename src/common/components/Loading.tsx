@@ -1,9 +1,11 @@
 import React from 'react'
-import { MoonLoader } from 'react-spinners'
+import {
+    SyncLoader
+} from 'react-spinners'
 
 const Loading = () => {
     return (
-        <MoonLoader size="30" />
+        <SyncLoader size="15" color='green' />
     )
 }
 

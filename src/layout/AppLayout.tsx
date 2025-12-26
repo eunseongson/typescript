@@ -14,6 +14,7 @@ const Layout = styled("div")({
 });
 
 const Sidebar = styled("div")(({ theme }) => ({
+  marginRight: "8px",
   width: "331px",
   height: "100%", // 100vh
   display: "flex",
@@ -79,8 +80,8 @@ const AppLayout = () => {
         </ContentBox>
       </Sidebar>
       <ContentBox>
-        <Outlet />
         <Navbar />
+        <Outlet />
       </ContentBox>
     </Layout>
   );

@@ -18,7 +18,9 @@ const LibraryHead = () => {
     return (
         <Layout>
             <BookmarkIcon />
-            <Typography variant='h2' fontWeight={700}>
+            <Typography variant='h2' fontWeight={700} sx={{
+                whiteSpace: 'nowrap',   // 줄바꿈 방지
+            }}>
                 Your Library
             </Typography>
             <Button onClick={handleCreatePlaylist}>
