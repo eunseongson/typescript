@@ -34,6 +34,16 @@ const ContentBox = styled(Box)(({ theme }) => ({
   marginRight: "8px",
 }));
 
+const MainContentBox = styled(Box)(({ theme }) => ({
+  borderRadius: "8px",
+  backgroundColor: theme.palette.background.paper,
+  color: theme.palette.text.primary,
+  width: "100%",
+  padding: "20px",
+  marginBottom: "8px",
+  marginRight: "8px",
+}));
+
 const NavList = styled("ul")({
   listStyle: "none",
   padding: 0,
@@ -79,10 +89,10 @@ const AppLayout = () => {
           <Library />
         </ContentBox>
       </Sidebar>
-      <ContentBox>
+      <MainContentBox>
         <Navbar />
         <Outlet />
-      </ContentBox>
+      </MainContentBox>
     </Layout>
   );
 };

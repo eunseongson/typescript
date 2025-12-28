@@ -1,10 +1,13 @@
 import { Box } from "@mui/material";
 import React from "react";
 import LoginButton from "../../common/components/LoginButton";
-import LogoutButton from "../../common/components/LogoutButton";
+import useGetCurrentUserProfile from "../../hooks/useGetCurrentUserProfile";
+import Profile from "../../common/components/Profile";
 
 const Navbar = () => {
-  const isLogin = !!localStorage.getItem('access_token');
+  const { data: userProfile } = useGetCurrentUserProfile()
+  if (userProfile)
+    console.log("userProfile.images[0]?.url : ", userProfile.images[0]?.url)
   return (
     <Box
       display="flex"
@@ -12,7 +15,7 @@ const Navbar = () => {
       alignItems="center"
       height="64px"
     >
-      {isLogin ? <LogoutButton /> : <LoginButton />}
+      {userProfile ? <Profile imageUrl={userProfile.images[0]?.url} /> : <LoginButton />}
     </Box>
   );
 };
