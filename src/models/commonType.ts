@@ -21,3 +21,12 @@ export interface IExplicitContent {
     filter_enabled: boolean;
     filter_locked: boolean;
 }
+
+export interface IOwner {
+    display_name?: string | null;
+    external_urls?: IExternalUrls;
+    href?: string;
+    id?: string;
+    type?: string;
+    uri?: string;
+}

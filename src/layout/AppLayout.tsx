@@ -32,6 +32,8 @@ const ContentBox = styled(Box)(({ theme }) => ({
   padding: "8px",
   marginBottom: "8px",
   marginRight: "8px",
+  overflowY: "auto",
+  scrollbarWidth: "none",
 }));
 
 const MainContentBox = styled(Box)(({ theme }) => ({
@@ -42,6 +44,8 @@ const MainContentBox = styled(Box)(({ theme }) => ({
   padding: "20px",
   marginBottom: "8px",
   marginRight: "8px",
+  overflowY: "auto",
+  scrollbarWidth: "none",
 }));
 
 const NavList = styled("ul")({
