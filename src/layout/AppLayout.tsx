@@ -32,8 +32,10 @@ const ContentBox = styled(Box)(({ theme }) => ({
   padding: "8px",
   marginBottom: "8px",
   marginRight: "8px",
-  overflowY: "auto",
-  scrollbarWidth: "none",
+  '&.library': {
+    overflowY: "auto",
+    scrollbarWidth: "none",
+  }
 }));
 
 const MainContentBox = styled(Box)(({ theme }) => ({
@@ -88,7 +90,7 @@ const AppLayout = () => {
             </StyledNavLink>
           </NavList>
         </ContentBox>
-        <ContentBox>
+        <ContentBox className="library">
           <LibraryHead />
           <Library />
         </ContentBox>
