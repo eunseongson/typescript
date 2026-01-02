@@ -45,25 +45,27 @@ const RightContentBox = styled('div')({
 })
 const PlaylistDetailHeader = (props: any) => {
     const { images, owner, name, tracks } = props
-    console.log("props: ", props)
     const hasImage = images && images.length > 0 && images[0].url;
     return (
-        <ContentBox>
-            {hasImage ? (
-                <img src={images[0].url} alt={name} />
-            ) : (
-                <EmptyImageBox>
-                    <MusicNoteIcon sx={{ fontSize: '80px' }} />
-                </EmptyImageBox>
-            )}
-            <RightContentBox>
-                <div className='title'>{name}</div>
-                <div className='additionalInfo'>
-                    <div className='owner'>{owner.display_name} :</div>
-                    <div className='tracks'>{tracks.items.length}songs</div>
-                </div>
-            </RightContentBox>
-        </ContentBox >
+        <div>
+            <ContentBox>
+                {hasImage ? (
+                    <img src={images[0].url} alt={name} />
+                ) : (
+                    <EmptyImageBox>
+                        <MusicNoteIcon sx={{ fontSize: '80px' }} />
+                    </EmptyImageBox>
+                )}
+                <RightContentBox>
+                    <div className='title'>{name}</div>
+                    <div className='additionalInfo'>
+                        <div className='owner'>{owner.display_name} :</div>
+                        <div className='tracks'>{tracks.items.length}songs</div>
+                    </div>
+                </RightContentBox>
+            </ContentBox >
+
+        </div>
     )
 }
 

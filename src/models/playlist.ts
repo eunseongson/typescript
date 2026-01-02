@@ -1,28 +1,32 @@
 import { IApiResponse } from "./apiResponse";
 import { IExternalUrls, IImages, IOwner } from "./commonType";
+import { IEpisode, ITrack } from "./tracks";
 
 export interface IGetCurrentUserPlaylistsRequest {
     limit?: number;
     offset?: number;
 }
 
-export type TGetCurrentUserPlaylistResponse  = IApiResponse<ISimplifiedPlaylist>;
+export type TGetCurrentUserPlaylistResponse = IApiResponse<ISimplifiedPlaylist>;
 
-export interface ISimplifiedPlaylist {
+export interface IBasePlaylist {
     collaborative?: boolean;
-    description?: string;
+    description?: string | null;
     external_urls?: IExternalUrls;
     href?: string;
     id?: string;
     images?: IImages[];
     name?: string;
     owner?: IOwner;
-    tracks?:{
+    type?: string;
+    uri?: string;
+}
+
+export interface ISimplifiedPlaylist extends IBasePlaylist {
+    tracks?: {
         href: string;
         total: number;
     }
-    type?: string;
-    uri?: string;
 }
 
 export interface IGetPlaylistRequest {
@@ -32,15 +36,7 @@ export interface IGetPlaylistRequest {
     additional_types?: string;
 }
 
-export interface IGetPlaylistResponse {
-    collaborative?: boolean;
-    description?: string | null;
-    external_urls?: IExternalUrls;
-    href?: string;
-    id?: string;
-    images?: IImages[];
-    name?: string;
-    owner?: IOwner;
+export interface IGetPlaylistResponse extends IBasePlaylist {
     public?: boolean;
     snapshot_id?: string;
     tracks?: {
@@ -50,7 +46,28 @@ export interface IGetPlaylistResponse {
         offset: number;
         previous: string | null;
         total: number;
+        items: IPlaylistTrack[];
+        type?: string;
+        uri?: string;
     }
-    type: string;
-    uri: string;
 }
+
+export interface IPlaylistTrack {
+    added_at?: string | null;
+    added_by?: {
+        external_urls?: IExternalUrls;
+        href?: string;
+        id?: string;
+        type?: string;
+        uri?: string;
+    } | null;
+    is_local?: boolean;
+    track: ITrack | IEpisode
+}
+
+export interface IGetPlaylistItemsRequest extends IGetPlaylistRequest {
+    offset?: number;
+    limit?: number;
+}
+
+export type TGetPlaylistItemsResponse = IApiResponse<IPlaylistTrack>

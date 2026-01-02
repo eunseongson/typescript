@@ -7,7 +7,7 @@ const AppLayout = React.lazy(() => import("./layout/AppLayout"))
 const HomePage = React.lazy(() => import("./pages/HomePage/HomePage"))
 const SearchPage = React.lazy(() => import("./pages/SearchPage/SearchPage"))
 const SearchWithKeywordPage = React.lazy(() => import("./pages/SearchPage/SearchWithKeywordPage"))
-const PlayListDetailPage = React.lazy(() => import("./pages/PlayListPage/PlaylistDetailPage"))
+const PlayListDetailPage = React.lazy(() => import("./pages/PlaylistDetailPage/PlaylistDetailPage"))
 
 // 0. 사이드바 있어야함 (플레이리스트, 메뉴)
 // 1. 홈페이지 /

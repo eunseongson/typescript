@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { ISimplifiedPlaylist } from "../../models/playlist";
 import PlaylistItems from "../../common/components/PlaylistItems";
 import { useNavigate } from "react-router";
@@ -7,7 +7,7 @@ interface IPlaylistProps {
   playlists: ISimplifiedPlaylist[];
 }
 
-const Playlist = (props: IPlaylistProps) => {
+const Playlist = forwardRef<HTMLDivElement, IPlaylistProps>((props, ref) => {
   const { playlists } = props;
 
   const navigate = useNavigate();
@@ -16,18 +16,24 @@ const Playlist = (props: IPlaylistProps) => {
   };
   return (
     <>
-      {playlists.map((playlist) => (
-        <PlaylistItems
-          key={playlist.id}
-          id={playlist.id || ""}
-          images={playlist.images}
-          name={playlist.name}
-          owner={playlist.owner}
-          handleClick={hadleClick}
-        />
-      ))}
+      {playlists.map((playlist, index) => {
+        const isTriggerItem = ref && index === playlists.length - 10;
+        return (
+          <div ref={isTriggerItem ? ref : null} key={playlist.id}>
+            <PlaylistItems
+              id={playlist.id || ""}
+              images={playlist.images}
+              name={playlist.name}
+              owner={playlist.owner}
+              handleClick={hadleClick}
+            />
+          </div>
+        )
+
+
+      })}
     </>
   );
-};
+});
 
 export default Playlist;

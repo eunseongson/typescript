@@ -41,10 +41,10 @@ const Library = () => {
     <EmptyPlaylist />
   ) : (
     <>
-      {data?.pages.map((page, index) => (
-        <Playlist key={index} playlists={page.items} />
-      ))}
-      <div ref={ref}></div>
+      {data?.pages.map((page, pageIndex) => {
+        const isLastPage = pageIndex === data.pages.length - 1;
+        return <Playlist key={pageIndex} playlists={page.items} ref={isLastPage ? ref : null} />;
+      })}
     </>
   );
 };

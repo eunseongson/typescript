@@ -30,3 +30,7 @@ export interface IOwner {
     type?: string;
     uri?: string;
 }
+
+export interface IRestrictions {
+    reasion?: string
+};
