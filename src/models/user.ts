@@ -8,7 +8,7 @@ export interface IUser {
     external_urls?: IExternalUrls;
     followers?: IFollowers;
     href?: string;
-    id?: string;
+    id: string;
     images: IImages[];
     product?: string;
     type?: string;
