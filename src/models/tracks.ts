@@ -54,7 +54,9 @@ export interface IEpisode {
     show: IShow;
 }
 
-interface IShow {
+export type ISimplifiedEposide = Omit<IEpisode, 'show'>;
+
+export interface IShow {
     available_markets: string[];
     copyrights: {
         text?: string;
@@ -75,4 +77,33 @@ interface IShow {
     type: 'show';
     uri: string;
     total_episodes: number;
+}
+
+export interface ISimplifiedAudioBook {
+    authors: {
+        name?: string;
+    };
+    available_markets: string[];
+    copyrights: {
+        text?: string;
+        type?: string;
+    };
+    description: string;
+    html_description: string;
+    edition?: string;
+    explicit: boolean;
+    external_urls: IExternalUrls;
+    href: string;
+    id: string;
+    images: IImages[];
+    languages: string[];
+    media_type: string;
+    name: string;
+    narrators: {
+        name?: string;
+    }
+    publisher: string;
+    type: 'audiobook';
+    uri: string;
+    total_chapters: number;
 }

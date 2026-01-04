@@ -6,8 +6,6 @@ import Profile from "../../common/components/Profile";
 
 const Navbar = () => {
   const { data: userProfile } = useGetCurrentUserProfile()
-  if (userProfile)
-    console.log("userProfile.images[0]?.url : ", userProfile.images[0]?.url)
   return (
     <Box
       display="flex"

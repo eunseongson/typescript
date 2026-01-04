@@ -5,12 +5,13 @@ import ErrorMessage from '../../common/components/ErrorMessage'
 import Loading from '../../common/components/Loading'
 import PlaylistDetailHeader from '../../layout/components/PlaylistDetailHeader'
 import useGetPlaylistItems from '../../hooks/useGetPlaylistItems'
-import { Typography, Table, TableBody, TableCell, TableHead, TableRow, TableContainer, styled } from '@mui/material'
+import { Table, TableBody, TableCell, TableHead, TableRow, TableContainer, styled } from '@mui/material'
 import DesktopPlaylistItem from './components/DesktopPlaylistItem'
 import { PAGE_LIMIT } from '../../configs/commonConfig'
 import { useInView } from 'react-intersection-observer'
 import LoginButton from '../../common/components/LoginButton'
 import useGetCurrentUserProfile from '../../hooks/useGetCurrentUserProfile'
+import EmptyPlaylistWithSearch from './components/EmptyPlaylistWithSearch'
 
 const NeedLoginContent = styled('div')({
     display: 'flex',
@@ -44,7 +45,7 @@ const PlaylistDetailPage = () => {
     return (
         <div>
             <PlaylistDetailHeader {...data} />
-            {data?.tracks?.total === 0 ? <Typography>써치</Typography> :
+            {data?.tracks?.total === 0 ? <EmptyPlaylistWithSearch /> :
                 <TableContainer
                     sx={{
                         height: 'calc(100vh - 334px)',
