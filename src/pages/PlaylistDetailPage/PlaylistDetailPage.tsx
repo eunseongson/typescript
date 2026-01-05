@@ -53,7 +53,6 @@ const PlaylistDetailPage = () => {
     }
   }, [inView, hasNextPage, isPlaylistItemsLoading, fetchNextPage]);
 
-  console.log("playlistItems:: ,", playlistItems);
   if (!user)
     return (
       <NeedLoginContent>

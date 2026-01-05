@@ -51,16 +51,15 @@ export const createPlaylist = async (user_id: string, params: ICreatePlaylistReq
     }
 }
 
-export const addItemsToPlaylist = async(params:IAddItemsToPlaylistRequest) =>{
-    try{
-        const {playlist_id, ...data} = params;
-        console.log("data :: ", data)
+export const addItemsToPlaylist = async (params: IAddItemsToPlaylistRequest) => {
+    try {
+        const { playlist_id, ...data } = params;
         const response = await api.post(`/playlists/${params.playlist_id}/tracks`, {
             uris: [data.uris],
             positions: data.positions
         });
         return response.data;
-    }catch(error){
+    } catch (error) {
         throw new Error('Failed to add items to playlist')
     }
 }

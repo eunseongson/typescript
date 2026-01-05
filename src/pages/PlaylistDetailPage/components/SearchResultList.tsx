@@ -50,7 +50,6 @@ const SearchResultList = ({
 
   const handleAddTrack = (track: ITrack) => {
     if (!id) return;
-    console.log("track.uri", track.uri);
     addItemsToPlaylist({
       playlist_id: id,
       positions: 0,
