@@ -1,4 +1,5 @@
-import { ICreatePlaylistRequest, IGetCurrentUserPlaylistsRequest, IGetPlaylistItemsRequest, IGetPlaylistRequest, IGetPlaylistResponse, TGetCurrentUserPlaylistResponse, TGetPlaylistItemsResponse } from "../models/playlist";
+import { C, u } from "react-router/dist/development/index-react-server-client-Cv5Q9lf0";
+import { IAddItemsToPlaylistRequest, ICreatePlaylistRequest, IGetCurrentUserPlaylistsRequest, IGetPlaylistItemsRequest, IGetPlaylistRequest, IGetPlaylistResponse, TGetCurrentUserPlaylistResponse, TGetPlaylistItemsResponse } from "../models/playlist";
 import api from "../utils/api"
 
 export const getCurrentUserPlaylists = async ({ limit, offset }: IGetCurrentUserPlaylistsRequest): Promise<TGetCurrentUserPlaylistResponse> => {
@@ -47,5 +48,19 @@ export const createPlaylist = async (user_id: string, params: ICreatePlaylistReq
         return response.data;
     } catch (error) {
         throw new Error('Failed to create playlist')
+    }
+}
+
+export const addItemsToPlaylist = async(params:IAddItemsToPlaylistRequest) =>{
+    try{
+        const {playlist_id, ...data} = params;
+        console.log("data :: ", data)
+        const response = await api.post(`/playlists/${params.playlist_id}/tracks`, {
+            uris: [data.uris],
+            positions: data.positions
+        });
+        return response.data;
+    }catch(error){
+        throw new Error('Failed to add items to playlist')
     }
 }
