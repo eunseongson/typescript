@@ -1,4 +1,4 @@
-import { Table, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material'
+import { Table, TableContainer, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import useSearchItemsByKeyword from '../../../hooks/useSearchItemsByKeyword';
 import { SEARCH_TYPE } from '../../../models/search';

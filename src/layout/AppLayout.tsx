@@ -1,5 +1,5 @@
-import { Box, styled, Typography } from "@mui/material";
 import React from "react";
+import { Box, styled, Typography } from "@mui/material";
 import { NavLink, Outlet } from "react-router";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
