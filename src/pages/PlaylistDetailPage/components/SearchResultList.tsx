@@ -57,6 +57,7 @@ const SearchResultList = ({
       uris: track.uri || "",
     });
   };
+
   return (
     <TableBody>
       {list.map((track, idx) => {

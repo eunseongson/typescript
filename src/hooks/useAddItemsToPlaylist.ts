@@ -8,9 +8,12 @@ const useAddItemsToPlaylist = () => {
         mutationFn: (params: IAddItemsToPlaylistRequest) => {
             return addItemsToPlaylist(params)
         },
-        onSuccess: () => {
+        onSuccess: (_data, variables) => {
+            const playlistId = variables.playlist_id;
+            if (playlistId) {
+                queryClient.invalidateQueries({ queryKey: ['playlist-items', { playlist_id: playlistId, limit: 10 }] });
+            }
             queryClient.invalidateQueries({ queryKey: ['getPlaylist'] });
-            queryClient.invalidateQueries({ queryKey: ['playlist-items', { playlist_id: params.playlist_id || "", limit: 10 }] });
         },
     })
 }
