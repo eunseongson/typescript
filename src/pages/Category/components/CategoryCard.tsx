@@ -24,28 +24,36 @@ const CardBox = styled(Card)<{ bgColor: string }>(({ bgColor }) => ({
   width: '26vw',
   height: '300px',
   backgroundColor: bgColor,
+  cursor: 'pointer',
+  overflow: 'hidden',
   img: {
     marginLeft: 'auto',
     marginRight: '20px',
     width: '200px',
     height: '200px',
     borderRadius: '10px',
-  },
-  cursor: 'pointer',
-  ":hover":{
-    transform: 'scale(1.02)',
     transition: 'transform 0.4s ease-in-out',
-  }
+  },
+  '&:hover img': {
+    transform: 'scale(1.03)',
+  },
+  '&:hover .card-content': {
+    transform: 'scale(1.03)',
+  },
 }))
+
+const StyledCardContent = styled(CardContent)({
+  transition: 'transform 0.4s ease-in-out',
+})
 
 const CategoryCard = (props: ICategory) => {
   const bgColor = getColorFromId(props.id)
   
   return (
     <CardBox bgColor={bgColor}>
-      <CardContent>
+      <StyledCardContent className="card-content">
         <Typography variant="h6" fontWeight={1000}>{props.name}</Typography>
-      </CardContent>
+      </StyledCardContent>
       <CardMedia component="img" src={props.icons[0].url} alt={props.name} sx={{width: '200px', height: '200px'}}/>
     </CardBox>
   )

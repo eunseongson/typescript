@@ -1,13 +1,13 @@
 import React, { Suspense, useEffect } from 'react';
 import './App.css';
-import { Route, Routes, useNavigate, Navigate } from 'react-router';
+import { Route, Routes, useNavigate } from 'react-router';
 import Loading from './common/components/Loading';
 import { useExchangetToken } from './hooks/useExchangetToken';
 const AppLayout = React.lazy(() => import("./layout/AppLayout"))
 const HomePage = React.lazy(() => import("./pages/HomePage/HomePage"))
 const SearchPage = React.lazy(() => import("./pages/SearchPage/SearchPage"))
 const SearchWithKeywordPage = React.lazy(() => import("./pages/SearchPage/SearchWithKeywordPage"))
-const PlayListDetailPage = React.lazy(() => import("./pages/PlaylistDetailPage/PlaylistDetailPage"))
+const PlayListDetailPage = React.lazy(() => import("./pages/PlayListPage/PlaylistDetailPage"))
 
 // 0. 사이드바 있어야함 (플레이리스트, 메뉴)
 // 1. 홈페이지 /
@@ -36,7 +36,6 @@ function App() {
           <Route path="callback" element={<HomePage />} />
           <Route path="search" element={<SearchPage />} />
           <Route path="search/:keyword" element={<SearchWithKeywordPage />} />
-          <Route path="playlist" element={<Navigate to="/" replace />} />
           <Route path="playlist/:id" element={<PlayListDetailPage />} />
         </Route>
       </Routes>
