@@ -1,13 +1,17 @@
-import React, { Suspense, useEffect } from 'react';
-import './App.css';
-import { Route, Routes, useNavigate } from 'react-router';
-import Loading from './common/components/Loading';
-import { useExchangetToken } from './hooks/useExchangetToken';
-const AppLayout = React.lazy(() => import("./layout/AppLayout"))
-const HomePage = React.lazy(() => import("./pages/HomePage/HomePage"))
-const SearchPage = React.lazy(() => import("./pages/SearchPage/SearchPage"))
-const SearchWithKeywordPage = React.lazy(() => import("./pages/SearchPage/SearchWithKeywordPage"))
-const PlayListDetailPage = React.lazy(() => import("./pages/PlayListPage/PlaylistDetailPage"))
+import React, { Suspense, useEffect } from "react";
+import "./App.css";
+import { Route, Routes, useNavigate } from "react-router";
+import Loading from "./common/components/Loading";
+import { useExchangetToken } from "./hooks/useExchangetToken";
+const AppLayout = React.lazy(() => import("./layout/AppLayout"));
+const HomePage = React.lazy(() => import("./pages/HomePage/HomePage"));
+const SearchPage = React.lazy(() => import("./pages/SearchPage/SearchPage"));
+const SearchWithKeywordPage = React.lazy(
+  () => import("./pages/SearchPage/SearchWithKeywordPage")
+);
+const PlayListDetailPage = React.lazy(
+  () => import("./pages/PlaylistDetailPage/PlaylistDetailPage")
+);
 
 // 0. 사이드바 있어야함 (플레이리스트, 메뉴)
 // 1. 홈페이지 /
@@ -18,16 +22,16 @@ const PlayListDetailPage = React.lazy(() => import("./pages/PlayListPage/Playlis
 function App() {
   const navigate = useNavigate();
   const urlParams = new URLSearchParams(window.location.search);
-  let code = urlParams.get('code');
-  const codeVerifier = localStorage.getItem('code_verifier');
+  let code = urlParams.get("code");
+  const codeVerifier = localStorage.getItem("code_verifier");
   const { mutate: exchangeToken } = useExchangetToken();
 
   useEffect(() => {
     if (code && codeVerifier) {
       exchangeToken({ code, codeVerifier });
-      navigate('/');
+      navigate("/");
     }
-  }, [code, codeVerifier, exchangeToken, navigate])
+  }, [code, codeVerifier, exchangeToken, navigate]);
   return (
     <Suspense fallback={<Loading />}>
       <Routes>
