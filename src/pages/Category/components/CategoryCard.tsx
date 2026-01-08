@@ -21,7 +21,7 @@ const getColorFromId = (id: string): string => {
 }
 
 const CardBox = styled(Card)<{ bgColor: string }>(({ bgColor }) => ({
-  width: '26vw',
+  width: 'calc(33.333% - 10px)',
   height: '300px',
   backgroundColor: bgColor,
   cursor: 'pointer',
@@ -48,13 +48,13 @@ const StyledCardContent = styled(CardContent)({
 
 const CategoryCard = (props: ICategory) => {
   const bgColor = getColorFromId(props.id)
-  
+
   return (
     <CardBox bgColor={bgColor}>
       <StyledCardContent className="card-content">
         <Typography variant="h6" fontWeight={1000}>{props.name}</Typography>
       </StyledCardContent>
-      <CardMedia component="img" src={props.icons[0].url} alt={props.name} sx={{width: '200px', height: '200px'}}/>
+      <CardMedia component="img" src={props.icons[0].url} alt={props.name} sx={{ width: '200px', height: '200px' }} />
     </CardBox>
   )
 }

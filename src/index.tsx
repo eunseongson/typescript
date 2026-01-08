@@ -8,6 +8,7 @@ import { CssBaseline, ThemeProvider } from '@mui/material'
 import theme from './theme';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { RecoilRoot } from 'recoil';
 
 const root = ReactDOM.createRoot(
   document.getElementById('content') as HTMLElement
@@ -19,7 +20,9 @@ root.render(
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <QueryClientProvider client={queryClient}>
-          <App />
+          <RecoilRoot>
+            <App />
+          </RecoilRoot>
           <ReactQueryDevtools />
         </QueryClientProvider>
       </ThemeProvider>

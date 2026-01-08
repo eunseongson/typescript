@@ -6,6 +6,7 @@ import CategoryCard from "./CategoryCard";
 const ContentBox = styled(Box)({
   display: 'flex',
   flexWrap: 'wrap',
+  justifyContent: 'space-between',
   gap: '15px',
   marginTop: '20px',
 })

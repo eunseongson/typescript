@@ -12,8 +12,10 @@ const useAddItemsToPlaylist = () => {
             const playlistId = variables.playlist_id;
             if (playlistId) {
                 queryClient.invalidateQueries({ queryKey: ['playlist-items', { playlist_id: playlistId, limit: 10 }] });
+                queryClient.invalidateQueries({ queryKey: ['getPlaylist', playlistId] });
             }
-            queryClient.invalidateQueries({ queryKey: ['getPlaylist'] });
+            // 플레이리스트 목록 쿼리 무효화 (이미지 업데이트를 위해)
+            queryClient.invalidateQueries({ queryKey: ['current-user-playlists'] });
         },
     })
 }
