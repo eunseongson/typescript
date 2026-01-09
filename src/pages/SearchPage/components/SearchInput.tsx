@@ -34,9 +34,7 @@ const SearchInput = () => {
     });
 
   useEffect(() => {
-    console.log("SearchInput - data:: ", data)
     if (data?.pages && data.pages.length > 0) {
-      console.log("data.pages:: ", data.pages)
       const searchResults = { ...data.pages[data.pages.length - 1] };
       setQueryData(searchResults);
     } else if (!data) {

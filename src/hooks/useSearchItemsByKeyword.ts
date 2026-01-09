@@ -31,7 +31,7 @@ const useSearchItemsByKeyword = (params: ISearchRequestParams) => {
             }
             return undefined;
         },
-        enabled: !!params.q
+        enabled: !!params.q && !!clientCredentialToken
     })
 }
 
