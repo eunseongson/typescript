@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import useSearchItemsByKeyword from "../../../hooks/useSearchItemsByKeyword";
 import { SEARCH_TYPE } from "../../../models/search";
@@ -14,10 +14,22 @@ const SearchInput = () => {
   const handleSearchKeyword = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     setQuery(value)
-    if (value) {
-      navigate(`/search/${value}`);
-    } else {
-      navigate('/search');
+    const nextURL = value ? `/search/${encodeURIComponent(value)}` : '/search';
+    window.history.replaceState(null, '', nextURL);
+    if (!value) {
+      navigate(`/search`);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      // debounceQuery를 즉시 업데이트하여 쿼리 실행
+      setDebounceQuery(query);
+      // 또는 refetch를 사용하여 현재 쿼리 다시 실행
+      if (debounceQuery) {
+        navigate(`/search/${debounceQuery}`);
+      }
     }
   };
   useEffect(() => {
@@ -25,9 +37,16 @@ const SearchInput = () => {
       setDebounceQuery(query); // 0.2초 뒤에 API용 쿼리 업데이트
     }, 200);
     return () => clearTimeout(timer);
-  }, [query, setDebounceQuery])
+  }, [query, setDebounceQuery, navigate])
 
-  const { data, error, isLoading, hasNextPage, fetchNextPage } =
+  useEffect(() => {
+    return () => {
+      setDebounceQuery('');
+      setQuery('');
+    }
+  }, [setDebounceQuery, setQuery])
+
+  const { data, error, isLoading, hasNextPage, fetchNextPage, refetch } =
     useSearchItemsByKeyword({
       q: debounceQuery,
       type: [SEARCH_TYPE.Track, SEARCH_TYPE.Artist, SEARCH_TYPE.Album],
@@ -47,6 +66,7 @@ const SearchInput = () => {
       <input
         value={query}
         onChange={handleSearchKeyword}
+        onKeyDown={handleKeyDown}
         placeholder="What do you want to play?"
       ></input>
       <SearchIcon className="icon" />
