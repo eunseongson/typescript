@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, styled } from '@mui/material';
+import { Grid2, Typography, styled } from '@mui/material';
 import PlayButton from '../../../common/components/PlayButton';
 import { ITrack } from '../../../models/tracks';
 
@@ -7,23 +7,7 @@ interface ITracksProps {
     tracks: ITrack[];
 }
 
-const TracksContainer = styled(Box)({
-    display: 'flex',
-    gap: '16px',
-    width: '100%',
-});
-
-const TrackCard = styled(Box)({
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '12px',
-    cursor: 'pointer',
-    flex: '1 1 0',
-    minWidth: 0,
-    maxWidth: 'calc((100% - 80px) / 6)',
-});
-
-const TrackImageContainer = styled(Box)({
+const TrackImageContainer = styled('div')({
     position: 'relative',
     width: '100%',
     aspectRatio: '1',
@@ -44,39 +28,40 @@ const TrackImageContainer = styled(Box)({
     },
 });
 
-const TrackTitle = styled(Typography)({
-    color: 'text.primary',
-    fontWeight: 400,
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
+const TrackCardLayout = styled('div')({
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px',
+    cursor: 'pointer',
 });
 
 const Tracks: React.FC<ITracksProps> = ({ tracks }) => {
     if (!tracks || tracks.length === 0) return null;
 
     return (
-        <TracksContainer>
+        <Grid2 container spacing={2}>
             {tracks.map((track, index) => {
                 const imageUrl = track.album?.images?.[1]?.url || track.album?.images?.[0]?.url || '';
                 const artistNames = track.artists?.map(a => a.name).join(', ') || 'Unknown Artist';
 
                 return (
-                    <TrackCard key={track.id || index}>
-                        <TrackImageContainer>
-                            {imageUrl && <img src={imageUrl} alt={track.name} />}
-                            <PlayButton />
-                        </TrackImageContainer>
-                        <div>
-                            <TrackTitle variant="body2">{track.name}</TrackTitle>
-                            <Typography variant="body2" color="text.secondary">
+                    <Grid2 size={{ xs: 6, sm: 4, md: 2 }} key={track.id || index}>
+                        <TrackCardLayout>
+                            <TrackImageContainer>
+                                {imageUrl && <img src={imageUrl} alt={track.name} />}
+                                <PlayButton />
+                            </TrackImageContainer>
+                            <Typography sx={{ fontSize: { xs: '12px', sm: '14px' } }} noWrap>
+                                {track.name}
+                            </Typography>
+                            <Typography sx={{ fontSize: { xs: '12px', sm: '14px' } }} color="text.secondary" noWrap>
                                 {artistNames}
                             </Typography>
-                        </div>
-                    </TrackCard>
+                        </TrackCardLayout>
+                    </Grid2>
                 );
             })}
-        </TracksContainer>
+        </Grid2>
     );
 };
 

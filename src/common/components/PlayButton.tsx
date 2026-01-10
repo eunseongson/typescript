@@ -20,6 +20,16 @@ const PlayButtonContainer = styled("button")(({ theme }) => ({
         outline: "none",
     },
     transition: 'all 0.3s ease-out',
+    [theme.breakpoints.down('sm')]: {
+        width: "40px",
+        height: "40px",
+        bottom: "8px",
+        right: "8px",
+        svg: {
+            width: "20px",
+            height: "20px",
+        },
+    },
 }));
 
 const PlayButton: React.FC = () => {

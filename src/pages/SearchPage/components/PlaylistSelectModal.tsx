@@ -25,14 +25,23 @@ const ModalContainer = styled('div')(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
     outline: 'none',
+    [theme.breakpoints.down('sm')]: {
+        width: '90%',
+        maxWidth: '400px',
+        padding: '16px',
+    },
 }));
 
-const ModalTitle = styled(Typography)({
+const ModalTitle = styled(Typography)(({ theme }) => ({
     fontWeight: 700,
     fontSize: '24px',
     marginBottom: '20px',
     color: 'text.primary',
-});
+    [theme.breakpoints.down('sm')]: {
+        fontSize: '20px',
+        marginBottom: '16px',
+    },
+}));
 
 const PlaylistList = styled('div')({
     display: 'flex',

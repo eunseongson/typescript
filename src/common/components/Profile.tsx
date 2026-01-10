@@ -12,6 +12,10 @@ const ImgProfile = styled.img`
     height: 40px;
     border-radius: 50%;
     cursor: pointer;
+    @media (max-width: 600px) {
+        width: 32px;
+        height: 32px;
+    }
 `;
 
 const Profile = (props: IProfileProps) => {

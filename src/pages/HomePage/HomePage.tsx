@@ -7,17 +7,23 @@ import Albums from "../SearchPage/components/Albums";
 import Tracks from "../SearchPage/components/Tracks";
 import Loading from "../../common/components/Loading";
 
-const ContentBox = styled(Box)({
+const ContentBox = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   gap: '30px',
-})
+  [theme.breakpoints.down('sm')]: {
+    gap: '20px',
+  },
+}))
 
-const SectionTitle = styled(Typography)({
+const SectionTitle = styled(Typography)(({ theme }) => ({
   fontWeight: 700,
   fontSize: '24px',
   color: 'text.primary',
-})
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '20px',
+  },
+}))
 const HomePage = () => {
   const { data, isLoading } =
     useSearchItemsByKeyword({

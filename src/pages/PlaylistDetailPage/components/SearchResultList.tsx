@@ -16,16 +16,43 @@ interface ISearchResultListProps {
   isLastPage: boolean;
 }
 
-const TableRowStyle = styled(TableRow)(({ theme }) => ({
+const TableRowStyle = styled(TableRow)({
   "&:hover": {
     cursor: "pointer",
-    backgroundColor: theme.palette.action.hover,
+    backgroundColor: (theme.palette.action as any).hover,
   },
   img: {
     width: "60px",
     borderRadius: "4px",
   },
-}));
+  '@media (max-width: 600px)': {
+    img: {
+      width: "48px",
+    },
+  },
+});
+
+const TrackInfo = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '2px',
+  minWidth: 0,
+  maxWidth: '200px',
+});
+
+const TrackName = styled('div')({
+  fontWeight: 'bold',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
+});
+
+const TrackArtist = styled('div')({
+  color: 'text.secondary',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
+});
 
 const SearchResultList = ({
   list,
@@ -60,23 +87,30 @@ const SearchResultList = ({
   return (
     <TableBody>
       {list.map((track, idx) => {
-        const isTriggerItem = isLastPage && idx === list.length - 6; // 6번째 아이템에 ref 달기
+        const isTriggerItem = isLastPage && idx === list.length - 6;
         return (
           <TableRowStyle key={track.id} ref={isTriggerItem ? ref : null}>
-            <TableCell>
-              <img src={track.album?.images[0].url} alt="" />
+            <TableCell sx={{ padding: '8px', width: '60px' }}>
+              <img src={track.album?.images[0]?.url} alt="" />
             </TableCell>
-            <TableCell>
-              <div style={{ marginBottom: "2px", fontWeight: "bold" }}>
-                {track.name}
-              </div>
-              <div style={{ color: theme.palette.text.secondary }}>
-                {track.artists ? track.artists[0].name : "unKnown"}
-              </div>
+            <TableCell sx={{ padding: '8px', width: 'auto' }}>
+              <TrackInfo>
+                <TrackName>{track.name}</TrackName>
+                <TrackArtist>{track.artists?.[0]?.name || "unKnown"}</TrackArtist>
+              </TrackInfo>
             </TableCell>
-            <TableCell>{track.album?.name}</TableCell>
-            <TableCell>
-              <Button onClick={() => handleAddTrack(track)}>Add</Button>
+            <TableCell sx={{
+              padding: '8px',
+              width: 'auto',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              display: { xs: 'none', sm: 'table-cell' }
+            }}>
+              {track.album?.name}
+            </TableCell>
+            <TableCell sx={{ padding: '8px', whiteSpace: 'nowrap', textAlign: 'right' }}>
+              <Button onClick={() => handleAddTrack(track)} size="small">Add</Button>
             </TableCell>
           </TableRowStyle>
         );

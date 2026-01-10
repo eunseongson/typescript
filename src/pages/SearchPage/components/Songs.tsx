@@ -30,6 +30,10 @@ const SongItem = styled(Box)(({ theme }) => ({
     width: '100%',
     maxWidth: '100%',
     boxSizing: 'border-box',
+    [theme.breakpoints.down('sm')]: {
+        gap: '12px',
+        padding: '6px',
+    },
     '& button': {
         opacity: 0,
         transition: 'all 0.2s ease-out',
@@ -43,13 +47,17 @@ const SongItem = styled(Box)(({ theme }) => ({
     },
 }));
 
-const SongImage = styled('img')({
+const SongImage = styled('img')(({ theme }) => ({
     width: '56px',
     height: '56px',
     borderRadius: '4px',
     objectFit: 'cover',
     flexShrink: 0,
-});
+    [theme.breakpoints.down('sm')]: {
+        width: '48px',
+        height: '48px',
+    },
+}));
 
 const SongInfo = styled(Box)({
     flex: '1 1 0',

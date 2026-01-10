@@ -5,7 +5,7 @@ import {
 
 const Loading = () => {
     return (
-        <div style={{ marginTop: '20px' }}>
+        <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}>
             <SyncLoader size="15" color='green' />
         </div>
     )

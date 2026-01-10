@@ -13,13 +13,12 @@ const Container = styled(Box)(({ theme }) => ({
   },
 }));
 
-const PlayListPage = () => {
+const LibraryPage = () => {
   return (
     <Container>
-      <LibraryHead />
       <Library />
     </Container>
   );
 };
 
-export default PlayListPage;
+export default LibraryPage;

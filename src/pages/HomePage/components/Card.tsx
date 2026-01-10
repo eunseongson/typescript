@@ -20,6 +20,7 @@ const CardLayout = styled('div')({
 const ImgContainer = styled('div')({
     position: 'relative',
     width: '100%',
+    aspectRatio: '1',
     img: { width: '100%', height: '100%', borderRadius: '8px' },
     button: { opacity: 0 },
     '&:hover': {
@@ -35,8 +36,8 @@ const Card = ({ image, name, artistName = "unknown Artist" }: ICardProps) => {
                 <img src={image} alt="" />
                 <PlayButton />
             </ImgContainer>
-            <Typography>{name}</Typography>
-            <Typography>{artistName}</Typography>
+            <Typography sx={{ fontSize: { xs: '12px', sm: '14px' } }}>{name}</Typography>
+            <Typography sx={{ fontSize: { xs: '12px', sm: '14px' } }}>{artistName}</Typography>
         </CardLayout>
     )
 }

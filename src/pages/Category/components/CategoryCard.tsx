@@ -22,13 +22,13 @@ const getColorFromId = (id: string): string => {
 
 const CardBox = styled(Card)<{ bgColor: string }>(({ bgColor }) => ({
   width: 'calc(33.333% - 10px)',
-  height: '300px',
   backgroundColor: bgColor,
   cursor: 'pointer',
   overflow: 'hidden',
   img: {
     marginLeft: 'auto',
     marginRight: '20px',
+    marginBottom: '20px',
     width: '200px',
     height: '200px',
     borderRadius: '10px',
@@ -39,6 +39,15 @@ const CardBox = styled(Card)<{ bgColor: string }>(({ bgColor }) => ({
   },
   '&:hover .card-content': {
     transform: 'scale(1.03)',
+  },
+  '@media (max-width: 600px)': {
+    width: 'calc(50% - 5px)',
+    img: {
+      width: '120px',
+      height: '120px',
+      marginRight: '10px',
+      marginBottom: '10px',
+    },
   },
 }))
 
@@ -52,7 +61,18 @@ const CategoryCard = (props: ICategory) => {
   return (
     <CardBox bgColor={bgColor}>
       <StyledCardContent className="card-content">
-        <Typography variant="h6" fontWeight={1000}>{props.name}</Typography>
+        <Typography
+          variant="h6"
+          fontWeight={1000}
+          noWrap
+          sx={{
+            fontSize: { xs: '14px', sm: '16px', md: '18px' },
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+          }}
+        >
+          {props.name}
+        </Typography>
       </StyledCardContent>
       <CardMedia component="img" src={props.icons[0].url} alt={props.name} sx={{ width: '200px', height: '200px' }} />
     </CardBox>

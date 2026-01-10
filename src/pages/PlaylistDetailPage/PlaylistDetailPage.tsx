@@ -72,7 +72,8 @@ const PlaylistDetailPage = () => {
       ) : (
         <TableContainer
           sx={{
-            height: "calc(100vh - 334px)",
+            height: { xs: "calc(100vh - 200px)", sm: "calc(100vh - 334px)" },
+            overflowX: "auto",
             overflowY: "auto",
             /* IE and Edge */
             msOverflowStyle: "none",
@@ -84,16 +85,16 @@ const PlaylistDetailPage = () => {
             },
           }}
         >
-          <Table stickyHeader>
+          <Table stickyHeader sx={{ tableLayout: 'fixed' }}>
             <TableHead>
               <TableRow
                 sx={{ "& .MuiTableCell-head": { backgroundColor: "#121212" } }}
               >
-                <TableCell>#</TableCell>
-                <TableCell>Title</TableCell>
-                <TableCell>Album</TableCell>
-                <TableCell>Date added</TableCell>
-                <TableCell>Duration</TableCell>
+                <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' }, width: { sm: '50px' } }}>#</TableCell>
+                <TableCell sx={{ width: { xs: '55%', sm: '40%' } }}>Title</TableCell>
+                <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' }, width: { sm: '30%' } }}>Album</TableCell>
+                <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' }, width: { sm: '15%' } }}>Date added</TableCell>
+                <TableCell sx={{ width: { xs: '45%', sm: '15%' } }}>Duration</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -102,7 +103,7 @@ const PlaylistDetailPage = () => {
                   const isLastPage =
                     pageIndex === playlistItems.pages.length - 1;
                   const isTriggerItem =
-                    isLastPage && itemIndex === page.items.length - 6; // 6번째 아이템에 ref 달기
+                    isLastPage && itemIndex === page.items.length - 6; 
 
                   return (
                     <DesktopPlaylistItem

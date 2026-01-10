@@ -12,16 +12,23 @@ import Artists from './components/Artists'
 import Albums from './components/Albums'
 import Loading from '../../common/components/Loading'
 
-const Container = styled(Box)({
+const Container = styled(Box)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
     gap: '24px',
-})
+    [theme.breakpoints.down('sm')]: {
+        gap: '16px',
+    },
+}))
 
-const TopSection = styled(Box)({
+const TopSection = styled(Box)(({ theme }) => ({
     display: 'flex',
     gap: '24px',
-})
+    [theme.breakpoints.down('sm')]: {
+        flexDirection: 'column',
+        gap: '16px',
+    },
+}))
 
 const Section = styled(Box)({
     display: 'flex',
@@ -30,11 +37,14 @@ const Section = styled(Box)({
     flex: 1,
 })
 
-const SectionTitle = styled(Typography)({
+const SectionTitle = styled(Typography)(({ theme }) => ({
     fontWeight: 700,
     fontSize: '24px',
     color: 'text.primary',
-})
+    [theme.breakpoints.down('sm')]: {
+        fontSize: '20px',
+    },
+}))
 
 const SearchWithKeywordPage = () => {
     const [, setQuery] = useRecoilState(searchQuery)

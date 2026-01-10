@@ -13,7 +13,12 @@ const EmptyPlaylistWrapper = styled('div')(({ theme }) => ({
     height: '160px',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    [theme.breakpoints.down('sm')]: {
+        padding: '16px',
+        height: 'auto',
+        minHeight: '140px',
+    },
 }))
 
 const StyledButton = styled(Button)(({ theme }) => ({
@@ -23,7 +28,11 @@ const StyledButton = styled(Button)(({ theme }) => ({
     fontWeight: '700',
     padding: '6px 20px',
     backgroundColor: theme.palette.secondary.main,
-    color: 'black'
+    color: 'black',
+    [theme.breakpoints.down('sm')]: {
+        width: '100%',
+        padding: '10px 20px',
+    },
 }))
 const EmptyPlaylist = () => {
     const { data: user } = useGetCurrentUserProfile();

@@ -26,11 +26,55 @@ const DesktopPlaylistItem = forwardRef<HTMLTableRowElement, IDesktopPlaylistItem
     }
     return (
         <TableRowStyle ref={ref}>
-            <TableCell>{index}</TableCell>
-            <TableCell>{item.track.name || "no Name"}</TableCell>
-            <TableCell>{isEpisode(item.track) ? "N/A" : item.track.album?.name}</TableCell>
-            <TableCell>{item.added_at ? formatDateString(item.added_at) : "Unknown"}</TableCell>
-            <TableCell>{item.track.duration_ms ? durationMsToTimeString(item.track.duration_ms) : "Unknown"}</TableCell>
+            <TableCell 
+                sx={{ 
+                    display: { xs: 'none', sm: 'table-cell' },
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    padding: '12px 8px',
+                }}
+            >
+                {index}
+            </TableCell>
+            <TableCell 
+                sx={{ 
+                    whiteSpace: 'nowrap', 
+                    overflow: 'hidden', 
+                    textOverflow: 'ellipsis',
+                    padding: '12px 8px',
+                }}
+            >
+                {item.track.name || "no Name"}
+            </TableCell>
+            <TableCell 
+                sx={{ 
+                    display: { xs: 'none', sm: 'table-cell' }, 
+                    whiteSpace: 'nowrap', 
+                    overflow: 'hidden', 
+                    textOverflow: 'ellipsis',
+                    padding: '12px 8px',
+                }}
+            >
+                {isEpisode(item.track) ? "N/A" : item.track.album?.name}
+            </TableCell>
+            <TableCell 
+                sx={{ 
+                    display: { xs: 'none', sm: 'table-cell' }, 
+                    whiteSpace: 'nowrap',
+                    padding: '12px 8px',
+                }}
+            >
+                {item.added_at ? formatDateString(item.added_at) : "Unknown"}
+            </TableCell>
+            <TableCell 
+                sx={{ 
+                    whiteSpace: 'nowrap',
+                    padding: '12px 8px',
+                }}
+            >
+                {item.track.duration_ms ? durationMsToTimeString(item.track.duration_ms) : "Unknown"}
+            </TableCell>
         </TableRowStyle>
     )
 });

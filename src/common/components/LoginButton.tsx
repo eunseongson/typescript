@@ -7,7 +7,16 @@ const LoginButton = () => {
     getSpotifyAuthUrl()
   }
   return (
-    <Button variant="contained" color="secondary" size="large" onClick={login}>
+    <Button 
+      variant="contained" 
+      color="secondary" 
+      size="large" 
+      onClick={login}
+      sx={{
+        padding: { xs: '6px 16px', sm: '8px 32px' },
+        fontSize: { xs: '14px', sm: '16px' },
+      }}
+    >
       Login
     </Button>
   );

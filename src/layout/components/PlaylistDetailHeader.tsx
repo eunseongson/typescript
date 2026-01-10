@@ -11,7 +11,16 @@ const ContentBox = styled('div')({
         width: '200px',
         height: '200px',
         borderRadius: '30px'
-    }
+    },
+    '@media (max-width: 600px)': {
+        flexDirection: 'column',
+        img: {
+            width: '100%',
+            height: 'auto',
+            padding: '16px',
+            borderRadius: '0',
+        },
+    },
 })
 
 // 이미지가 없을 때 보여줄 아이콘 컨테이너
@@ -34,14 +43,24 @@ const RightContentBox = styled('div')({
     padding: '20px',
     '& .title': {
         fontSize: '35px',
-        fontWeight: 'bold' // (선택사항) 글씨가 커지면 두께도 조절하는 경우가 많습니다.
+        fontWeight: 'bold'
     },
     '& .additionalInfo': {
         display: 'flex',
     },
     '&.owner': {
-        fontWeight: 'bold' // (선택사항) 글씨가 커지면 두께도 조절하는 경우가 많습니다.
-    }
+        fontWeight: 'bold'
+    },
+    '@media (max-width: 600px)': {
+        padding: '16px',
+        '& .title': {
+            fontSize: '24px',
+        },
+        '& .additionalInfo': {
+            flexWrap: 'wrap',
+            gap: '8px',
+        },
+    },
 })
 const PlaylistDetailHeader = (props: any) => {
     const { images, owner, name, tracks } = props

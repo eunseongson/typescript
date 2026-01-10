@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import React from "react";
 import LoginButton from "../../common/components/LoginButton";
 import useGetCurrentUserProfile from "../../hooks/useGetCurrentUserProfile";
@@ -6,6 +6,8 @@ import Profile from "../../common/components/Profile";
 import { styled } from "@mui/system";
 import { useLocation } from "react-router";
 import SearchInput from "../../pages/SearchPage/components/SearchInput";
+import LibraryHead from "./LibraryHead";
+import spotifyLogo from "../../assets/img/spotify-logo.png";
 
 const ContentBox = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -33,6 +35,10 @@ const ContentBox = styled(Box)(({ theme }) => ({
     backgroundColor: theme.palette.background.gray,
     border: 'none',
     paddingLeft: '40px',
+    [theme.breakpoints.down('sm')]: {
+      width: '280px',
+      fontSize: '14px',
+    },
     '&::placeholder': {
       color: 'white',
       fontSize: '16px',
@@ -47,11 +53,35 @@ const ContentBox = styled(Box)(({ theme }) => ({
 const Navbar = () => {
   const { data: userProfile } = useGetCurrentUserProfile()
   const location = useLocation();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isLibraryPage = location.pathname === '/library' || location.pathname.startsWith('/library/');
+
   return (
     <ContentBox>
-      {location.pathname.startsWith('/search') && (
+      {isMobile && isLibraryPage ? (
+        <LibraryHead />
+      ) : location.pathname.startsWith('/search') ? (
         <SearchInput />
-      )}
+      ) : isMobile ? (
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
+          <img
+            src={spotifyLogo}
+            alt="Spotify"
+            style={{ width: '28px', height: '23px' }}
+          />
+          <Typography
+            variant="h1"
+            fontWeight={700}
+            sx={{
+              fontSize: { xs: '20px', sm: '24px' },
+              color: theme.palette.primary.main
+            }}
+          >
+            Spotify
+          </Typography>
+        </Box>
+      ) : null}
       <div className="right-nav-items">
         {userProfile ? <Profile imageUrl={userProfile.images[0]?.url} /> : <LoginButton />}
       </div>

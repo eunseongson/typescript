@@ -6,17 +6,21 @@ import SearchIcon from "@mui/icons-material/Search";
 import LibraryHead from "./components/LibraryHead";
 import Library from "./components/Library";
 import Navbar from "./components/Navbar";
+import MobileBottomNav from "./components/MobileBottomNav";
 
-const Layout = styled("div")({
+const Layout = styled("div")(({ theme }) => ({
   display: "flex",
   height: "100vh",
   padding: "8px",
-});
+  [theme.breakpoints.down("sm")]: {
+    padding: 0,
+  },
+}));
 
 const Sidebar = styled("div")(({ theme }) => ({
   marginRight: "8px",
   width: "331px",
-  height: "100%", // 100vh
+  height: "100%",
   display: "flex",
   flexDirection: "column",
   [theme.breakpoints.down("sm")]: {
@@ -35,7 +39,10 @@ const ContentBox = styled(Box)(({ theme }) => ({
   '&.library': {
     overflowY: "auto",
     scrollbarWidth: "none",
-  }
+  },
+  [theme.breakpoints.down("sm")]: {
+    display: "none",
+  },
 }));
 
 const MainContentBox = styled(Box)(({ theme }) => ({
@@ -48,6 +55,13 @@ const MainContentBox = styled(Box)(({ theme }) => ({
   marginRight: "8px",
   overflowY: "auto",
   scrollbarWidth: "none",
+  [theme.breakpoints.down("sm")]: {
+    borderRadius: 0,
+    padding: "16px",
+    marginBottom: "60px",
+    marginRight: 0,
+    height: "calc(100vh - 64px)",
+  },
 }));
 
 const NavList = styled("ul")({
@@ -99,6 +113,7 @@ const AppLayout = () => {
         <Navbar />
         <Outlet />
       </MainContentBox>
+      <MobileBottomNav />
     </Layout>
   );
 };

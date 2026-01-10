@@ -1,6 +1,5 @@
 import React from "react";
-import styled from "@emotion/styled";
-import { Box } from "@mui/material";
+import { Box, styled } from "@mui/material";
 import { ISimplifiedPlaylist } from "../../models/playlist";
 import { useParams } from "react-router";
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
@@ -11,7 +10,7 @@ interface IPlaylistItemsProps extends ISimplifiedPlaylist {
 }
 
 // 이미지가 없을 때 보여줄 아이콘 컨테이너
-const EmptyImageBox = styled('div')({
+const EmptyImageBox = styled('div')(({ theme }) => ({
   width: '60px',
   height: '60px',
   borderRadius: "8px",
@@ -21,11 +20,24 @@ const EmptyImageBox = styled('div')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-})
+  svg: {
+    width: '30px',
+    height: '30px',
+  },
+  [theme.breakpoints.down('sm')]: {
+    width: '48px',
+    height: '48px',
+    svg: {
+      width: '24px',
+      height: '24px',
+    },
+  },
+}))
 
 const PlaylistItems = (props: IPlaylistItemsProps) => {
   const { id, name, images, owner } = props;
   const { id: nowId } = useParams<{ id: string }>()
+
   const ContentBox = styled(Box)(({ theme }) => ({
     display: "flex",
     padding: "8px",
@@ -38,10 +50,18 @@ const PlaylistItems = (props: IPlaylistItemsProps) => {
       alignSelf: "center",
     },
     cursor: "pointer",
-    backgroundColor: nowId === id && theme.palette.action.active,
+    backgroundColor: nowId === id ? theme.palette.action.active : 'transparent',
     "&:hover": {
       backgroundColor: theme.palette.action.hover,
-    }
+    },
+    [theme.breakpoints.down('sm')]: {
+      gap: "12px",
+      padding: "6px",
+      img: {
+        width: "48px",
+        height: "48px",
+      },
+    },
   }));
 
   const AdditionalInfoStyle = styled("div")(({ theme }) => ({
@@ -55,6 +75,12 @@ const PlaylistItems = (props: IPlaylistItemsProps) => {
     },
     fontSize: "14px",
     color: "gray",
+    [theme.breakpoints.down('sm')]: {
+      ".name": {
+        fontSize: "14px",
+      },
+      fontSize: "12px",
+    },
   }));
   return (
     <ContentBox onClick={() => props.handleClick(id)}>

@@ -7,12 +7,16 @@ import useCreatePlaylist from '../../hooks/useCreatePlaylist';
 import { getSpotifyAuthUrl } from '../../utils/auth';
 import useGetCurrentUserProfile from '../../hooks/useGetCurrentUserProfile';
 
-const Layout = styled('div')({
+const Layout = styled('div')(({ theme }) => ({
     display: 'flex',
     gap: '20px',
-    margin: '16px',
-    alignItems: 'center'
-})
+    alignItems: 'center',
+    flex: 1,
+    [theme.breakpoints.down('sm')]: {
+        gap: '12px',
+        margin: 0,
+    },
+}))
 const LibraryHead = () => {
     const { data: user } = useGetCurrentUserProfile();
     const { mutate: createPlaylist } = useCreatePlaylist();

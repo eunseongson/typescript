@@ -19,9 +19,12 @@ const TopResultContainer = styled(Box)(({ theme }) => ({
             opacity: 1,
         },
     },
+    [theme.breakpoints.down('sm')]: {
+        padding: '16px',
+    },
 }));
 
-const ImageContainer = styled(Box)({
+const ImageContainer = styled(Box)(({ theme }) => ({
     width: '150px',
     height: '150px',
     marginBottom: '20px',
@@ -31,7 +34,17 @@ const ImageContainer = styled(Box)({
         borderRadius: '8px',
         objectFit: 'cover',
     },
-});
+    [theme.breakpoints.down('md')]: {
+        width: '120px',
+        height: '120px',
+        marginBottom: '16px',
+    },
+    [theme.breakpoints.down('sm')]: {
+        width: '100px',
+        height: '100px',
+        marginBottom: '12px',
+    },
+}));
 
 const PlayButtonWrapper = styled(Box)({
     position: 'absolute',
@@ -55,7 +68,11 @@ const TopResult: React.FC<ITopResultProps> = ({ track }) => {
             <Typography
                 variant="h4"
                 fontWeight={700}
-                sx={{ mb: 1, color: 'text.primary' }}
+                sx={{ 
+                    mb: 1, 
+                    color: 'text.primary',
+                    fontSize: { xs: '18px', sm: '20px', md: '24px' }
+                }}
             >
                 {track.name}
             </Typography>
